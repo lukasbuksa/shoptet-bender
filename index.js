@@ -25,10 +25,21 @@ const blankModeScript = {
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
-        return (
-            '<script src="/script.js"></script><link rel="stylesheet" href="/style.css">' +
-            match
-        );
+        if (options.mode === "production") {
+            return (
+                "<script src=" +
+                options.remote +
+                '"/script.js"></script><link rel="stylesheet" href="' +
+                options.remote +
+                '/style.css">' +
+                match
+            );
+        } else {
+            return (
+                '<script src="/script.js"></script><link rel="stylesheet" href="/style.css">' +
+                match
+            );
+        }
     },
 };
 
