@@ -42,6 +42,7 @@ const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
     open: false,
+    host: options.host,
     watch: options.watch,
     files: [
         options.folder

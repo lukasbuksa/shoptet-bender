@@ -12,6 +12,7 @@ command
     .option('-r, --remote <url>', 'URL of the remote Eshop with https:// prefix')
     .option('-w, --watch', 'watch for changes and reload the page', true)
     .option('-b, --blankMode', 'simulate the blank template.', false)
-    .option('-n, --notify', 'display pop-over notifications in the browser', false);
+    .option('-n, --notify', 'display pop-over notifications in the browser', false)
+    .option('-h, --host', 'sets the host', 'localhost');
 
 export default command;
