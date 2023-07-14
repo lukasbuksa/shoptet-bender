@@ -29,7 +29,7 @@ const scriptStyle = {
             return (
                 "<script src='" +
                 options.media +
-                "'script.js'></script><link rel='stylesheet' href='" +
+                "script.js'></script><link rel='stylesheet' href='" +
                 options.media +
                 "style.css'>" +
                 match
