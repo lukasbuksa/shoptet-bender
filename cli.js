@@ -13,6 +13,6 @@ command
     .option('-w, --watch', 'watch for changes and reload the page', true)
     .option('-b, --blankMode', 'simulate the blank template.', false)
     .option('-n, --notify', 'display pop-over notifications in the browser', false)
-    .option('-hs, --host', 'sets the host', 'localhost');
+    .option('-hs, --host', 'sets the URL of host');
 
 export default command;
