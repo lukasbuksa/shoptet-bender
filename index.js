@@ -61,25 +61,20 @@ const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
     host: options.host ?? config.defaultHost,
-    open: false,
-    watch: options.watch,
-    files: [
-        options.folder
-            ? "./" + options.folder + "/*"
-            : config.defaultFolder + "/*",
-    ],
+    open: options.mode === "production" ? false : "local",
+    watch: options.mode !== "production" ? options.watch : false,
+    files:
+        options.mode !== "production"
+            ? [
+                  options.folder
+                      ? "./" + options.folder + "/*"
+                      : config.defaultFolder + "/*",
+              ]
+            : [],
     serveStatic: [options.folder ?? config.defaultFolder],
-    rewriteRules: [
-        {
-            match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
-            replace:
-                "<script src='" +
-                options.media +
-                "script.js'></script><link rel='stylesheet' href='" +
-                options.media +
-                "style.css'>",
-        },
-    ],
+    rewriteRules: rewriteRules.filter(
+        (value) => Object.keys(value).length !== 0
+    ),
     port: options.port ?? config.defaultPort,
     notify: options.notify,
 });
