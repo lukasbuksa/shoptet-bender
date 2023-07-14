@@ -31,7 +31,7 @@ const scriptStyle = {
                 config.defaultUrl +
                     "'script.js'></script><link rel='stylesheet' href='" +
                     options.remote ??
-                config.defaultUrl + "style.css'>"
+                config.defaultUrl + "style.css'>" + match
             );
         } else {
             return (
