@@ -29,9 +29,9 @@ const scriptStyle = {
             return (
                 "<script src=" +
                 options.remote +
-                '/script.js"></script><link rel="stylesheet" href="' +
+                'script.js"></script><link rel="stylesheet" href="' +
                 options.remote +
-                '/style.css">' +
+                'style.css">' +
                 match
             );
         } else {
