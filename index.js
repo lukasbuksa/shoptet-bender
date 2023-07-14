@@ -26,12 +26,14 @@ const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
         if (options.mode === "production") {
-            console.log("<script src='" +
-            options.media +
-            "script.js'></script><link rel='stylesheet' href='" +
-            options.media +
-            "style.css'>" +
-            match)
+            console.log(
+                "<script src='" +
+                    options.media +
+                    "script.js'></script><link rel='stylesheet' href='" +
+                    options.media +
+                    "style.css'>" +
+                    match
+            );
             return (
                 "<script src='" +
                 options.media +
@@ -50,7 +52,9 @@ const scriptStyle = {
 };
 
 const rewriteRules = [
-    { ...scriptStyle }
+    { ...scriptStyle },
+    { ...(options.blankMode && blankModeStyle) },
+    { ...(options.blankMode && blankModeScript) },
 ];
 
 const bs = browserSync.create();
@@ -65,9 +69,17 @@ bs.init({
             : config.defaultFolder + "/*",
     ],
     serveStatic: [options.folder ?? config.defaultFolder],
-    rewriteRules: rewriteRules.filter(
-        (value) => Object.keys(value).length !== 0
-    ),
+    rewriteRules: [
+        {
+            match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
+            replace:
+                "<script src='" +
+                options.media +
+                "script.js'></script><link rel='stylesheet' href='" +
+                options.media +
+                "style.css'>",
+        },
+    ],
     port: options.port ?? config.defaultPort,
     notify: options.notify,
 });
