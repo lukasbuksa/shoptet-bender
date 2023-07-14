@@ -130,7 +130,7 @@ browser-sync-ui@^2.29.3:
 
 "browser-sync@github:lukasbuksa/browser-sync":
   version "2.29.3"
-  resolved "git+ssh://git@github.com/lukasbuksa/browser-sync.git#bc875652b30974ab25b89fc143ce23c5067b6edb"
+  resolved "git+ssh://git@github.com/lukasbuksa/browser-sync.git#9582eaffa090c24eed27108ad6f32b325b49d379"
   dependencies:
     browser-sync-client "^2.29.3"
     browser-sync-ui "^2.29.3"
