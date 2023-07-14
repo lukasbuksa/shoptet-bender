@@ -27,12 +27,11 @@ const scriptStyle = {
     fn: function (req, res, match) {
         if (options.mode === "production") {
             return (
-                "<script src=" +
-                options.remote +
-                'script.js"></script><link rel="stylesheet" href="' +
-                options.remote +
-                'style.css">' +
-                match
+                "<script src='" + options.remote ??
+                config.defaultUrl +
+                    "'script.js'></script><link rel='stylesheet' href='" +
+                    options.remote ??
+                config.defaultUrl + "style.css'>"
             );
         } else {
             return (
