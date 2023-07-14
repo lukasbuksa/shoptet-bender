@@ -50,9 +50,7 @@ const scriptStyle = {
 };
 
 const rewriteRules = [
-    { ...scriptStyle },
-    { ...(options.blankMode && blankModeStyle) },
-    { ...(options.blankMode && blankModeScript) },
+    { ...scriptStyle }
 ];
 
 const bs = browserSync.create();
