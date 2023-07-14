@@ -43,6 +43,8 @@ const scriptStyle = {
     },
 };
 
+console.log(scriptStyle)
+
 const rewriteRules = [
     { ...scriptStyle },
     { ...(options.blankMode && blankModeStyle) },
