@@ -41,8 +41,8 @@ const rewriteRules = [
 const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
-    open: false,
     host: { target: options.host ?? config.defaultHost },
+    open: "external",
     watch: options.watch,
     files: [
         options.folder
