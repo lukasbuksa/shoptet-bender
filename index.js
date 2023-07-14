@@ -54,6 +54,8 @@ const rewriteRules = [
     { ...(options.blankMode && blankModeScript) },
 ];
 
+console.log(rewriteRules)
+
 const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
