@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import browserSync from "browser-sync-mono";
+import browserSync from "browser-sync";
 import command from "./cli.js";
 import { config } from "./config.js";
 
