@@ -26,6 +26,11 @@ const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
         if (options.mode === "production") {
+            console.log("<script src='" +
+            options.media +
+            "script.js'></script><link rel='stylesheet' href='" +
+            options.media +
+            "style.css'>" + match)
             return (
                 "<script src='" +
                 options.media +
