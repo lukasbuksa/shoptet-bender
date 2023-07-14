@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import browserSync from 'browser-sync';
-import command from './cli.js';
-import { config } from './config.js'
+import browserSync from "browser-sync";
+import command from "./cli.js";
+import { config } from "./config.js";
 
 command.parse(process.argv);
 
@@ -10,12 +10,16 @@ const options = command.opts();
 
 const blankModeStyle = {
     match: /<link rel="stylesheet" media="all" href="https:\/\/cdn\.myshoptet\.com.*>/i,
-    fn: function () { return ('');},
-}
+    fn: function () {
+        return "";
+    },
+};
 
 const blankModeScript = {
     match: /<script src="https:\/\/cdn.myshoptet.com.*>/i,
-    fn: function () { return ('');},
+    fn: function () {
+        return "";
+    },
 };
 
 const scriptStyle = {
@@ -26,23 +30,28 @@ const scriptStyle = {
             match
         );
     },
-}
+};
 
 const rewriteRules = [
-    {...scriptStyle},
-    {...(options.blankMode && blankModeStyle)},
-    {...(options.blankMode && blankModeScript)}
+    { ...scriptStyle },
+    { ...(options.blankMode && blankModeStyle) },
+    { ...(options.blankMode && blankModeScript) },
 ];
 
 const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
+    open: false,
     watch: options.watch,
-    files: [options.folder ? './' + options.folder + '/*' : config.defaultFolder + '/*'],
+    files: [
+        options.folder
+            ? "./" + options.folder + "/*"
+            : config.defaultFolder + "/*",
+    ],
     serveStatic: [options.folder ?? config.defaultFolder],
     rewriteRules: rewriteRules.filter(
         (value) => Object.keys(value).length !== 0
     ),
     port: 3010,
-    notify: options.notify
+    notify: options.notify,
 });
