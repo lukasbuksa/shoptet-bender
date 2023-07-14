@@ -42,7 +42,7 @@ const bs = browserSync.create();
 bs.init({
     proxy: { target: options.remote ?? config.defaultUrl },
     host: options.host ?? config.defaultHost,
-    open: "external",
+    open: false,
     watch: options.watch,
     files: [
         options.folder
@@ -53,6 +53,6 @@ bs.init({
     rewriteRules: rewriteRules.filter(
         (value) => Object.keys(value).length !== 0
     ),
-    port: 3010,
+    port: options.port ?? config.defaultPort,
     notify: options.notify,
 });
