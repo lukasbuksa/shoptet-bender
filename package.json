@@ -12,7 +12,7 @@
   "author": "Shoptet",
   "license": "ISC",
   "dependencies": {
-    "browser-sync": "github:lukasbuksa/browser-sync",
+    "browser-sync": "^2.29.3",
     "commander": "^9.4.0",
     "path": "^0.12.7"
   }
