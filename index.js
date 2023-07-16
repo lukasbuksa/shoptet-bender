@@ -26,8 +26,8 @@ const blankModeScript = {
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
-        const scriptContent = fs.readFileSync("/script.js", "utf8");
-        const styleContent = fs.readFileSync("/style.css", "utf8");
+        const scriptContent = fs.readFileSync("./src/script.js", "utf8");
+        const styleContent = fs.readFileSync("./src/style.css", "utf8");
 
         return (
             '<script>' + scriptContent + '</script><style>' + styleContent + '</style>' +
