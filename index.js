@@ -26,15 +26,26 @@ const blankModeScript = {
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
-        const scriptContent = fs.readFileSync("./src/script.js", "utf8");
-        const styleContent = fs.readFileSync("./src/style.css", "utf8");
+        if (options.mode === "production") {
+            const scriptContent = fs.readFileSync("./src/script.js", "utf8");
+            const styleContent = fs.readFileSync("./src/style.css", "utf8");
 
-        return (
-            '<script>' + scriptContent + '</script><style>' + styleContent + '</style>' +
-            match
-        );
+            return (
+                "<script>" +
+                scriptContent +
+                "</script><style>" +
+                styleContent +
+                "</style>" +
+                match
+            );
+        } else {
+            return (
+                '<script src="/script.js"></script><link rel="stylesheet" href="/style.css">' +
+                match
+            );
+        }
     },
-}
+};
 
 const rewriteRules = [
     { ...scriptStyle },
