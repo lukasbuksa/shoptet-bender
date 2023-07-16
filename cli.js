@@ -10,7 +10,6 @@ command
 
 command
     .option('-r, --remote <url>', 'URL of the remote Eshop with https:// prefix')
-    .option('-md, --media <url>', 'URL to the media address')
     .option('-hs, --host <url>', 'sets the URL of host')
     .option('-p, --port <number>', 'sets the port number')
     .option('-m, --mode <mode>', 'sets the mode of package')
