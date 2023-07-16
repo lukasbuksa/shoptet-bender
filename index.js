@@ -3,6 +3,7 @@
 import browserSync from "browser-sync";
 import command from "./cli.js";
 import { config } from "./config.js";
+import fs from "fs";
 
 command.parse(process.argv);
 
@@ -25,31 +26,15 @@ const blankModeScript = {
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
-        if (options.mode === "production") {
-            console.log(
-                "<script src='" +
-                    options.media +
-                    "script.js'></script><link rel='stylesheet' href='" +
-                    options.media +
-                    "style.css'>" +
-                    match
-            );
-            return (
-                "<script src='" +
-                options.media +
-                "script.js'></script><link rel='stylesheet' href='" +
-                options.media +
-                "style.css'>" +
-                match
-            );
-        } else {
-            return (
-                '<script src="/script.js"></script><link rel="stylesheet" href="/style.css">' +
-                match
-            );
-        }
+        const scriptContent = fs.readFileSync("/script.js", "utf8");
+        const styleContent = fs.readFileSync("/style.css", "utf8");
+
+        return (
+            '<script>' + scriptContent + '</script><style>' + styleContent + '</style>' +
+            match
+        );
     },
-};
+}
 
 const rewriteRules = [
     { ...scriptStyle },
