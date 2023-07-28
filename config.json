@@ -2,6 +2,6 @@
     "defaultUrl": "https://classic.shoptet.cz/",
     "defaultHost": "localhost",
     "defaultPort": 3010,
-    "defaultFolder": "./src",
+    "defaultFolder": "./build",
     "outputFolder": "./dist"
 }
