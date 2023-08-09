@@ -27,8 +27,8 @@ const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
         if (options.mode === "production") {
-            const scriptContent = fs.readFileSync("./src/script.js", "utf8");
-            const styleContent = fs.readFileSync("./src/style.css", "utf8");
+            const scriptContent = fs.readFileSync("./build/script.js", "utf8");
+            const styleContent = fs.readFileSync("./build/style.css", "utf8");
 
             return (
                 "<script>" +
