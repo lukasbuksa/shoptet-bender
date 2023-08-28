@@ -70,7 +70,7 @@ bs.init({
     serveStatic: [
         options.folder ?? config.defaultFolder,
         {
-            route: ["/assets"],
+            route: ["./src/assets"],
             dir: "./build/assets",
         },
     ],
