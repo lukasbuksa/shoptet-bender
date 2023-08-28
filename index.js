@@ -69,6 +69,9 @@ bs.init({
             : [],
     serveStatic: [options.folder ?? config.defaultFolder],
     snippet: false,
+    injectChanges: false,
+    ghostMode: false,
+    codeSync: false,
     rewriteRules: rewriteRules.filter(
         (value) => Object.keys(value).length !== 0
     ),
