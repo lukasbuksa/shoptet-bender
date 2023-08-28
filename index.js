@@ -68,9 +68,6 @@ bs.init({
               ]
             : [],
     serveStatic: [options.folder ?? config.defaultFolder],
-    rewriteRules: rewriteRules.filter(
-        (value) => Object.keys(value).length !== 0
-    ),
     port: options.port ?? config.defaultPort,
     notify: options.notify,
 });
