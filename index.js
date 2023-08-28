@@ -68,13 +68,18 @@ bs.init({
               ]
             : [],
     serveStatic: [options.folder ?? config.defaultFolder],
-    snippet: false,
-    injectChanges: false,
-    ghostMode: false,
-    codeSync: false,
     rewriteRules: rewriteRules.filter(
         (value) => Object.keys(value).length !== 0
     ),
+    middleware: [
+        function(req, res, next) {
+            const contentType = res.getHeader('Content-Type');
+            if (contentType && contentType.includes('text/css')) {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+            }
+            next();
+        },
+    ],
     port: options.port ?? config.defaultPort,
     notify: options.notify,
 });
