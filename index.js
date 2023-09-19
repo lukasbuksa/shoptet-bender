@@ -26,14 +26,14 @@ const blankModeScript = {
 const productionStyle = {
     match: /<link rel="stylesheet" href="\/user\/documents\/style.css">/i,
     fn: function () {
-        return '<link rel="stylesheet" href="/style.css">';
+        return '<link rel="stylesheet" href="/src/style.css">';
     },
 };
 
 const productionScript = {
     match: /<script type="text\/javascript" src="\/user\/documents\/script.js"><\/script>/i,
     fn: function () {
-        return '<script src="/script.js"></script>';
+        return '<script src="/src/script.js"></script>';
     },
 };
 
