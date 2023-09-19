@@ -2,7 +2,7 @@
 
 import browserSync from "browser-sync";
 import command from "./cli.js";
-import {config} from "./config.js";
+import { config } from "./config.js";
 import fs from "fs";
 
 command.parse(process.argv);
@@ -40,31 +40,38 @@ const productionScript = {
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
-        const scriptContent = fs.readFileSync("./src/script.js", "utf8");
-        const styleContent = fs.readFileSync("./src/style.css", "utf8");
+        if (options.mode === "production") {
+            const scriptContent = fs.readFileSync("./src/script.js", "utf8");
+            const styleContent = fs.readFileSync("./src/style.css", "utf8");
 
-        return (
-            "<script>" +
-            scriptContent +
-            "</script><style>" +
-            styleContent +
-            "</style>" +
-            match
-        );
-    }
+            return (
+                "<script>" +
+                scriptContent +
+                "</script><style>" +
+                styleContent +
+                "</style>" +
+                match
+            );
+        } else {
+            return (
+                '<script src="/script.js"></script><link rel="stylesheet" href="/style.css">' +
+                match
+            );
+        }
+    },
 };
 
 const rewriteRules = [
-    {...(options.production && productionStyle)},
-    {...(options.production && productionScript)},
-    {...scriptStyle},
-    {...(options.blankMode && blankModeStyle)},
-    {...(options.blankMode && blankModeScript)},
+    { ...(options.production && productionStyle) },
+    { ...(options.production && productionScript) },
+    { ...scriptStyle },
+    { ...(options.blankMode && blankModeStyle) },
+    { ...(options.blankMode && blankModeScript) },
 ];
 
 const bs = browserSync.create();
 bs.init({
-    proxy: {target: options.remote ?? config.defaultUrl},
+    proxy: { target: options.remote ?? config.defaultUrl },
     host: options.host ?? config.defaultHost,
     open: options.mode === "production" ? false : "local",
     watch: options.mode !== "production" ? options.watch : false,
