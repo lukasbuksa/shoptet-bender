@@ -23,12 +23,26 @@ const blankModeScript = {
     },
 };
 
+const prductionStyle = {
+    match: /<link rel="stylesheet" href="\/user\/documents\/style.css>/i,
+    fn: function () {
+        return "";
+    },
+};
+
+const prductionScript = {
+    match: /<script type="text\/javascript" src="\/user\/documents\/script.js>/i,
+    fn: function () {
+        return "";
+    },
+};
+
 const scriptStyle = {
     match: /<\/body>(?![\s\S]*<\/body>[\s\S]*$)/i,
     fn: function (req, res, match) {
         if (options.mode === "production") {
-            const scriptContent = fs.readFileSync("./build/script.js", "utf8");
-            const styleContent = fs.readFileSync("./build/style.css", "utf8");
+            const scriptContent = fs.readFileSync("./src/script.js", "utf8");
+            const styleContent = fs.readFileSync("./src/style.css", "utf8");
 
             return (
                 "<script>" +
@@ -51,6 +65,8 @@ const rewriteRules = [
     { ...scriptStyle },
     { ...(options.blankMode && blankModeStyle) },
     { ...(options.blankMode && blankModeScript) },
+    { ...(options.production && prductionStyle) },
+    { ...(options.production && prductionScript) },
 ];
 
 const bs = browserSync.create();
@@ -62,10 +78,10 @@ bs.init({
     files:
         options.mode !== "production"
             ? [
-                  options.folder
-                      ? "./" + options.folder + "/*"
-                      : config.defaultFolder + "/*",
-              ]
+                options.folder
+                    ? "./" + options.folder + "/*"
+                    : config.defaultFolder + "/*",
+            ]
             : [],
     serveStatic: [options.folder ?? config.defaultFolder],
     rewriteRules: rewriteRules.filter(

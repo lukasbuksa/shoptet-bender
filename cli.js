@@ -15,6 +15,8 @@ command
     .option('-m, --mode <mode>', 'sets the mode of package')
     .option('-w, --watch', 'watch for changes and reload the page', true)
     .option('-b, --blankMode', 'simulate the blank template.', false)
-    .option('-n, --notify', 'display pop-over notifications in the browser', false);
+    .option('-n, --notify', 'display pop-over notifications in the browser', false)
+    .option('-v, --production', 'enable production mode scripts rewrites', false);
 
 export default command;
+
