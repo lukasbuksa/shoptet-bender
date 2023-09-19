@@ -23,15 +23,15 @@ const blankModeScript = {
     },
 };
 
-const prductionStyle = {
-    match: /<link rel="stylesheet" href="\/user\/documents\/style.css>/i,
+const productionStyle = {
+    match: /<link rel="stylesheet" href="\/user\/documents\/style.css">/i,
     fn: function () {
         return "";
     },
 };
 
-const prductionScript = {
-    match: /<script type="text\/javascript" src="\/user\/documents\/script.js>/i,
+const productionScript = {
+    match: /<script type="text\/javascript" src="\/user\/documents\/script.js"><\/script>/i,
     fn: function () {
         return "";
     },
@@ -65,8 +65,8 @@ const rewriteRules = [
     { ...scriptStyle },
     { ...(options.blankMode && blankModeStyle) },
     { ...(options.blankMode && blankModeScript) },
-    { ...(options.production && prductionStyle) },
-    { ...(options.production && prductionScript) },
+    { ...(options.production && productionStyle) },
+    { ...(options.production && productionScript) },
 ];
 
 const bs = browserSync.create();
